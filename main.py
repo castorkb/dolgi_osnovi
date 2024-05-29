@@ -588,58 +588,123 @@ lambda-функции для выполнения основных матема�
 общему объёму поступивших переводов'''
 
 
-# # Чтение данных из файлов с проверкой ошибок
-# try:
-#     with open("clients.txt", "r") as file:
-#         clients_data = file.readlines()
-# except FileNotFoundError:
-#     print("Файл 'clients.txt' не найден.")
-#     clients_data = []
+"""# Чтение данных из файлов с проверкой ошибок
+try:
+    with open("clients.txt", "r") as file:
+        clients_data = file.readlines()
+except FileNotFoundError:
+    print("Файл 'clients.txt' не найден.")
+    clients_data = []
+
+try:
+    with open("banks.txt", "r") as file:
+        banks_data = file.readlines()
+except FileNotFoundError:
+    print("Файл 'banks.txt' не найден.")
+    banks_data = []
+
+# Словарь для хранения общего объема переводов по каждому банку
+bank_transfers = {}
+bank_names = {}
+
+# Проверка данных о банках и создание словаря названий банков
+for line in banks_data:
+    parts = line.strip().split(maxsplit=1)
+    if len(parts) < 2:
+        continue
+    bank_code = parts[0]
+    bank_name = parts[1].strip()
+    bank_names[bank_code] = bank_name
+    bank_transfers[bank_code] = 0
+
+# Проверка данных о клиентах и подсчет общего объема переводов для каждого банка
+for line in clients_data:
+    parts = line.strip().split()
+    if len(parts) < 2:
+        continue
+    bank_code = parts[0][:4]
+    try:
+        transfer_amount = int(parts[1])
+    except ValueError:
+        print(f"Неверный формат суммы перевода: {parts[1]}")
+        continue
+    if bank_code in bank_transfers:
+        bank_transfers[bank_code] += transfer_amount
+    else:
+        # Если код банка отсутствует в списке, добавим его с соответствующим переводом
+        bank_transfers[bank_code] = transfer_amount
+        bank_names[bank_code] = f"Unknown Bank {bank_code}"
+
+# Сортировка банков по объему переводов
+sorted_banks = sorted(bank_transfers.items(), key=lambda x: x[1], reverse=True)
+
+# Вывод результата
+print("Список названий банков, отсортированный по объему поступивших переводов:")
+for bank_code, total_transfers in sorted_banks:
+    bank_name = bank_names.get(bank_code, f"Unknown Bank {bank_code}")
+    print(f"{bank_name}: {total_transfers} сом.")"""
+
+
+
+'''Напишите регулярное выражение, которое будет искать в тексте из
+файла алфавити.txt кыргызские слова длиной не менее 5 символов.'''
+
+
+# # Открываем файл для чтения
+# with open('алфавити.txt', 'r', encoding='utf-8') as file:
+#     text = file.read()
 #
-# try:
-#     with open("banks.txt", "r") as file:
-#         banks_data = file.readlines()
-# except FileNotFoundError:
-#     print("Файл 'banks.txt' не найден.")
-#     banks_data = []
+# # Выражение для поиска кыргызских слов длиной не менее 5 символов
+# regular_expression = r'\b[а-яүөәңғөчийыүі]{5,}\b'
 #
-# # Словарь для хранения общего объема переводов по каждому банку
-# bank_transfers = {}
-# bank_names = {}
+# # Находим все совпадения
+# matches = re.findall(regular_expression, text)
+
+# # Проходим циклом и выводим совпадения
+# for match in matches:
+#     print(match)
+
+
+'''Напишите регулярное выражение, которое выведет список азиатских
+стран, оканчивающихся на –стан, из файла asia_subregions.txt.'''
+
+
+# # Открываем файл для чтения
+# with open('asia_subregions.txt', 'r', encoding='utf-8') as file:
+#     text = file.read()
 #
-# # Проверка данных о банках и создание словаря названий банков
-# for line in banks_data:
-#     parts = line.strip().split(maxsplit=1)
-#     if len(parts) < 2:
-#         continue
-#     bank_code = parts[0]
-#     bank_name = parts[1].strip()
-#     bank_names[bank_code] = bank_name
-#     bank_transfers[bank_code] = 0
+# # Выражение для поиска стран, оканчивающихся на "-стан"
+# regular_expression = r'\b\w+стан\b'
 #
-# # Проверка данных о клиентах и подсчет общего объема переводов для каждого банка
-# for line in clients_data:
-#     parts = line.strip().split()
-#     if len(parts) < 2:
-#         continue
-#     bank_code = parts[0][:4]
-#     try:
-#         transfer_amount = int(parts[1])
-#     except ValueError:
-#         print(f"Неверный формат суммы перевода: {parts[1]}")
-#         continue
-#     if bank_code in bank_transfers:
-#         bank_transfers[bank_code] += transfer_amount
-#     else:
-#         # Если код банка отсутствует в списке, добавим его с соответствующим переводом
-#         bank_transfers[bank_code] = transfer_amount
-#         bank_names[bank_code] = f"Unknown Bank {bank_code}"
+# # Находим все совпадения
+# matches = re.findall(regular_expression, text)
 #
-# # Сортировка банков по объему переводов
-# sorted_banks = sorted(bank_transfers.items(), key=lambda x: x[1], reverse=True)
+# # Выводим найденные страны
+# for match in matches:
+#     print(match)
+
+
+'''Найдите все даты в файле ulanbaatar.txt. Даты либо записаны
+римскими цифрами, тогда после них написано в. либо век, века,
+либо имеют слово год, года, году, г. после 4 цифр, либо имеют вид
+годов жизни (четыре цифры дефис четыре цифры).'''
+
+
+# # Открываем файл для чтения
+# with open('ulanbaatar.txt', 'r', encoding='utf-8') as file:
+#     text = file.read()
 #
-# # Вывод результата
-# print("Список названий банков, отсортированный по объему поступивших переводов:")
-# for bank_code, total_transfers in sorted_banks:
-#     bank_name = bank_names.get(bank_code, f"Unknown Bank {bank_code}")
-#     print(f"{bank_name}: {total_transfers} сом.")
+# # Выражение для поиска дат
+# regular_expression = r'\b(?:[IVX]{1,5}\.?\s*(?:века?|в\.?)|(?:\d{4}|[IVX]{1,5})\s*(?:год(?:а|у|ы|ов)?))\b|\b\d{4}-\d{4}\b'
+#
+# # Находим все совпадения
+# matches = re.findall(regular_expression, text)
+#
+# # Выводим найденные даты
+# for match in matches:
+#     print(match)
+
+
+
+
+
