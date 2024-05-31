@@ -3,6 +3,7 @@ import os
 from colorama import Fore, Back, Style
 import time
 import shutil
+from datetime import datetime
 
 '''Тема словари - 2,3,4,5 .
 Множество - Таблица рекордов,
@@ -709,15 +710,15 @@ for match in matches:
 
 
 
-# import os
-# import shutil
-# from colorama import Fore, Back, Style
-#
-#
-#
-#
+
+
+
+
+
 # def check_partition_exist():
-#     """Проверка наличия раздела."""
+#     '''
+#     Проверка наличия раздела.
+#     '''
 #     partition_name = input("Введите имя раздела для проверки: ")
 #     if os.path.exists(partition_name):
 #         print(f"Раздел '{partition_name}' существует.")
@@ -726,7 +727,9 @@ for match in matches:
 #
 #
 # def check_file_exist():
-#     """Проверка существования файла в разделе."""
+#     '''
+#     Проверка существования файла в разделе.
+#     '''
 #     partition_name = input("Введите имя раздела: ")
 #     file_name = input("Введите имя файла для проверки: ")
 #     file_path = os.path.join(partition_name, file_name)
@@ -737,7 +740,9 @@ for match in matches:
 #
 #
 # def create_new_partition_and_file():
-#     """Создание нового раздела и файла в нем."""
+#     '''
+#     Создание нового раздела и файла в нем.
+#     '''
 #     partition_name = input("Введите имя нового раздела: ")
 #     os.makedirs(partition_name, exist_ok=True)
 #
@@ -752,7 +757,9 @@ for match in matches:
 #
 #
 # def delete_file():
-#     """Удаление файла, выбранного пользователем."""
+#     '''
+#     Удаление файла, выбранного пользователем.
+#     '''
 #     partition_name = input("Введите имя раздела для удаления файла: ")
 #     files = os.listdir(partition_name)
 #
@@ -771,7 +778,9 @@ for match in matches:
 #
 #
 # def delete_partition():
-#     """Удаление раздела."""
+#     '''
+#     Удаление раздела.
+#     '''
 #     partition_name = input("Введите имя раздела для удаления: ")
 #     try:
 #         os.rmdir(partition_name)
@@ -781,7 +790,9 @@ for match in matches:
 #
 #
 # def delete_file_in_any_partition():
-#     """Удаление файла в любом разделе, если его имя совпадает с введенным пользователем."""
+#     '''
+#     Удаление файла в любом разделе, если его имя совпадает с введенным пользователем.
+#     '''
 #     file_name = input("Введите имя файла для удаления: ")
 #     for root, dirs, files in os.walk(".", topdown=False):
 #         if file_name in files:
@@ -793,7 +804,9 @@ for match in matches:
 #
 #
 # def move_files_to_backup():
-#     """Перемещение всех файлов в папке в подкаталог backup."""
+#     '''
+#     Перемещение всех файлов в папке в подкаталог backup.
+#     '''
 #     partition_name = input("Введите имя раздела для перемещения файлов: ")
 #     backup_dir = os.path.join(partition_name, "backup")
 #
@@ -865,7 +878,9 @@ for match in matches:
 
 
 # def archive_files(func):
-#     '''Декоратор для копирования файлов в архивную папку'''
+#     '''
+#     Декоратор для копирования файлов в архивную папку
+#     '''
 #     def wrapper(self, *args, **kwargs):
 #         if not os.path.exists(self.archive_folder):
 #             os.makedirs(self.archive_folder)
@@ -876,7 +891,9 @@ for match in matches:
 #     return wrapper
 #
 # class BankSystem:
-#     ''' Класс Банковская система'''
+#     '''
+#     Класс Банковская система
+#     '''
 #     def __init__(self):
 #         self.pin_file = "pin.txt"
 #         self.transactions_file = "transactions.txt"
@@ -885,19 +902,25 @@ for match in matches:
 #         self.pin = None
 #
 #     def save_pin(self, pin):
-#         '''Сохраняет PIN-код в файл'''
+#         '''
+#         Сохраняет PIN-код в файл
+#         '''
 #         with open(self.pin_file, "w") as pin_file:
 #             pin_file.write(pin)
 #
 #     def load_pin(self):
-#         '''Загружает PIN-код из файла'''
+#         '''
+#         Загружает PIN-код из файла
+#         '''
 #         if os.path.exists(self.pin_file):
 #             with open(self.pin_file, "r") as pin_file:
 #                 return pin_file.read().strip()
 #         return None
 #
 #     def check_pin(self):
-#         '''Проверяет введенный PIN-код'''
+#         '''
+#         Проверяет введенный PIN-код
+#         '''
 #         correct_pin = self.load_pin()
 #         if correct_pin is None:
 #             return False
@@ -914,7 +937,9 @@ for match in matches:
 #
 #     @archive_files
 #     def create_account(self):
-#         '''Создает новый счет'''
+#         '''
+#         Создает новый счет
+#         '''
 #         if not os.path.exists(self.accounts_folder):
 #             os.makedirs(self.accounts_folder)
 #         account_number = 1
@@ -926,7 +951,9 @@ for match in matches:
 #
 #     @archive_files
 #     def delete_account(self):
-#         '''Удаляет счет'''
+#         '''
+#         Удаляет счет
+#         '''
 #         account_number = input("Введите номер счета для удаления: ")
 #         account_file_path = os.path.join(self.accounts_folder, f"account{account_number}.txt")
 #         if os.path.exists(account_file_path):
@@ -971,3 +998,60 @@ for match in matches:
 
 
 
+
+
+class ChatSystem:
+    '''
+    Класс Система Чатов
+    '''
+    def __init__(self, chat_file='chat.txt', user_data_file='userdata.txt'):
+        self.chat_file = chat_file
+        self.user_data_file = user_data_file
+
+    def read_chat(self):
+        """
+        Читает файл чата и выводит его содержимое на экран.
+        """
+        with open(self.chat_file, 'r', encoding='utf-8') as file:
+            print(file.read())
+
+    def write_message(self, username, message):
+        """
+        Записывает сообщение пользователя в чат.
+        """
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        with open(self.chat_file, 'a', encoding='utf-8') as file:
+            file.write('\n{} ({})\n{}\n'.format(username, timestamp, message))
+
+    def authenticate(self):
+        """
+        Проверяет логин и пароль пользователя.
+        """
+        username = input('Введите логин: ').lower()
+        password = input('Введите пароль: ').lower()
+
+        with open(self.user_data_file, 'r', encoding='utf-8') as file:
+            for line in file:
+                stored_username, stored_password = line.strip().split(':')
+                if stored_username.lower() == username and stored_password == password:
+                    return True
+        print('Ошибка: Неверный логин или пароль.')
+        return False
+
+    def main(self):
+        """
+        Основная функция для запуска чата.
+        """
+        if not self.authenticate():
+            return
+
+        self.read_chat()
+        username = input('Введите ваше имя: ')
+        user_message = input('Введите ваше сообщение: ')
+        self.write_message(username, user_message)
+        print('Сообщение отправлено.')
+
+chat_system = ChatSystem()
+
+if __name__ == "__main__":
+    chat_system.main()
